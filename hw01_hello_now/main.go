@@ -13,7 +13,7 @@ func main() {
 	loc, errLoc := time.LoadLocation("UTC")
 
 	if errLoc != nil {
-		log.Fatal("Can not load location with error: ", err)
+		log.Fatal("Can not load location with error: ", errLoc)
 	}
 
 	time, err := ntp.Time("0.beevik-ntp.pool.ntp.org")
