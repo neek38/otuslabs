@@ -10,7 +10,12 @@ import (
 
 func main() {
 	currentTime := time.Now()
-	loc, _ := time.LoadLocation("UTC")
+	loc, errLoc := time.LoadLocation("UTC")
+
+	if errLoc != nil {
+		log.Fatal("Can not load location with error: ", err)
+	}
+
 	time, err := ntp.Time("0.beevik-ntp.pool.ntp.org")
 
 	if err != nil {
