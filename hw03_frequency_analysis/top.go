@@ -10,29 +10,24 @@ type KeyValue struct {
 	Value int
 }
 
-func Top10(inputtedString string) []string {
-	regexToSplit := regexp.MustCompile(`[0-9\n\t.,!?;: «»()—\"']+`)
-	onlySeparators := regexp.MustCompile(`^[0-9\n\t.,!?;:\- «»()—\"']+$`)
-	wordsMap := make(map[string]int)
-	var result []string
+var RegexToSplit = regexp.MustCompile(`[0-9\n\t.,!?;: «»()—\"']+`)
+var OnlySeparators = regexp.MustCompile(`^[0-9\n\t.,!?;:\- «»()—\"']+$`)
 
-	//var keyValueSlice []KeyValue
-	keyValueSlice := []KeyValue{}
+func Top10(inputtedString string) []string {
+	wordsMap := make(map[string]int)
+	var result = make([]string, 0, 10)
+
+	var keyValueSlice = make([]KeyValue, 0, len(wordsMap))
 	if inputtedString == "" {
 		return result
 	}
 
-	split := regexToSplit.Split(inputtedString, -1)
+	split := RegexToSplit.Split(inputtedString, -1)
 
 	for i := range split {
-		if !onlySeparators.MatchString(split[i]) {
+		if !OnlySeparators.MatchString(split[i]) {
 			loweredString := strings.ToLower(split[i])
-			_, ok := wordsMap[loweredString]
-			if ok {
-				wordsMap[loweredString]++
-			} else {
-				wordsMap[loweredString] = 1
-			}
+			wordsMap[loweredString]++
 		}
 	}
 
