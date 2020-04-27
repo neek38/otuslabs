@@ -26,7 +26,6 @@ func (l *lruCache) Set(key string, value interface{}) bool {
 			l.queue.Remove(element)
 			delete(l.items, element.Value.(*cacheItem).key)
 		}
-
 	}
 
 	item := &cacheItem{key: key, Value: value}
@@ -42,7 +41,6 @@ func (l *lruCache) Get(key string) (interface{}, bool) {
 		return elem.Value.(*cacheItem).Value, true
 	}
 	return nil, false
-
 }
 
 func (l *lruCache) Clear() {

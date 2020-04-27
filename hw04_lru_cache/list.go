@@ -84,18 +84,19 @@ func (l *list) MoveToFront(i *listItem) {
 }
 
 func (l *list) Remove(i *listItem) {
-	if l.len == 1 {
+	switch {
+	case l.len == 1:
 		l.first = nil
 		l.last = nil
 		l.len = 0
 		return
-	} else if i.prev == nil {
+	case i.prev == nil:
 		i.next.prev = nil
 		l.first = i.next
-	} else if i.next == nil {
+	case i.next == nil:
 		i.prev.next = nil
 		l.last = i.prev
-	} else {
+	default:
 		i.prev.next = i.next
 		i.next.prev = i.prev
 	}
