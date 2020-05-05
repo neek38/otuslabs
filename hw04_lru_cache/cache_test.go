@@ -74,9 +74,22 @@ func TestCache(t *testing.T) {
 		wasInCache = c.Set("fff", 600)
 		require.False(t, wasInCache)
 
+		//this element was removed
+		_, ok = c.Get("bbb")
+		require.False(t, ok)
+
+		wasInCache = c.Set("fff", 700)
+		require.True(t, wasInCache)
+
+		wasInCache = c.Set("xyz", 800)
+		require.False(t, wasInCache)
+
+		_, ok = c.Get("ccc")
+		require.False(t, ok)
+
 		val, ok = c.Get("fff")
 		require.True(t, ok)
-		require.Equal(t, 600, val)
+		require.Equal(t, 700, val)
 
 		c.Clear()
 		_, ok = c.Get("fff")
